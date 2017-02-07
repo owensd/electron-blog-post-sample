@@ -1,0 +1,27 @@
+{
+  "name": "blog-post",
+  "version": "0.1.0",
+  "description": "Test configuration",
+  "devDependencies": {
+    "grunt": "^1.0.0",
+    "grunt-download-electron": "^2.1.4",
+    "grunt-contrib-symlink": "^1.0.0"
+  },
+  "license": "MIT",
+  "repository": "www.google.com",
+  "config": {
+    "electron": {
+      "version": "1.5.0",
+      "installDir": ".deps/electron",
+      "manifestDir": ".out/app",
+      "main": "electron-host"
+    },
+    "symlink": {
+      "src": "ui/public",
+      "dest": ".out/app/public"
+    }
+  },
+  "scripts": {
+    "postinstall": "mkdir -p .deps/electron; grunt download-electron"
+  }
+}

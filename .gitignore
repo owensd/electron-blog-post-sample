@@ -1,0 +1,6 @@
+**/.DS_store
+.deps
+.out
+.tmp
+node_modules
+
