@@ -1,11 +1,6 @@
 module.exports = function(grunt) {
     grunt.initConfig({
         pkg: grunt.file.readJSON("package.json"),
-        "download-electron": {
-            version: "<%= pkg.config.electron.version %>",
-            outputDir: "<%= pkg.config.electron.installDir %>",
-            rebuild: true
-        },
         "generate-manifest": {
             name: "<%= pkg.name %>",
             version: "<%= pkg.version %>",
@@ -27,7 +22,6 @@ module.exports = function(grunt) {
         }
     });
 
-    grunt.loadNpmTasks("grunt-download-electron");
     grunt.loadNpmTasks("grunt-contrib-symlink");
 
     grunt.registerTask("generate-manifest", "Generate the Electron manifest.", function() {

@@ -20,7 +20,9 @@
                        ["cljsbuild" "once" "main"]
                        ["shell" "grunt" "generate-mainjs"]
                        ["shell" "grunt" "symlink"]
-                       ["cljsbuild" "once" "ui"]]}
+                       ["cljsbuild" "once" "ui"]]
+           "electron-package" ["shell" "./node_modules/electron-packager/cli.js" ".out/app" "--out=.dist"]
+           "electron-clean" ["shell" "rm" "-rf" ".out" ".tmp" ".dist"]}
 
  :cljsbuild {:builds {:main {:source-paths ["app/src"]
                              :incremental true
@@ -37,7 +39,7 @@
                            :incremental true
                            :assert true
                            :compiler {:output-to ".out/app/ui.js"
-                                      :output-dir ".out/lib/ui"
+                                      :output-dir ".out/app/lib/ui"
                                       :warnings true
                                       :elide-asserts true
                                       :optimizations :none
