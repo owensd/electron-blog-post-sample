@@ -16,7 +16,7 @@
 
   (let [u (.format url (clj->js {:pathname (.join path
                                                   (js* "__dirname")
-                                                  "public"
+                                                  ".."
                                                   "index.html")
                                  :protocol "file:"
                                  :slashes true}))]

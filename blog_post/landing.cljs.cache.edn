@@ -1,0 +1,1 @@
+{:rename-macros {}, :renames {}, :externs {document {getElementById {}}, Object {innerHTML {}}}, :use-macros {}, :excludes #{}, :name blog-post.landing, :imports nil, :requires nil, :uses nil, :require-macros nil, :doc nil}
