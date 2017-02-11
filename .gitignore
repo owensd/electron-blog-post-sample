@@ -3,4 +3,6 @@
 .out
 .tmp
 node_modules
-
+.dist
+.lein-*
+package.json
