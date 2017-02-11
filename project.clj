@@ -53,7 +53,6 @@
    {:source-paths ["app/src"]
     :compiler {:output-to ".out/dev/app/goog/electron-deps.js"
                :output-dir ".out/dev/app"
-
                :target :nodejs
                :optimizations :none}}
    :ui-dev
