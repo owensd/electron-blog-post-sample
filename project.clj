@@ -7,7 +7,8 @@
  :dependencies [[org.clojure/clojure "1.8.0"]
                 [org.clojure/clojurescript "1.9.456"]]
  :plugins [[lein-cljsbuild "1.1.5"]
-           [lein-shell "0.5.0"]]
+           [lein-shell "0.5.0"]
+           [lein-figwheel "0.5.9"]]
 
  ;; Configuration variables used by our own build processes.
  :electron-version "1.5.0"
@@ -30,7 +31,8 @@
                   ["shell" "grunt" "generate-manifest" "--target=.out/dev/app"]
                   ["shell" "grunt" "copy-file" "--source=./app/hoist/main-dev.js" "--target=.out/dev/app/main.js"]
                   ["shell" "grunt" "copy-file" "--source=./ui/hoist/index-dev.html" "--target=.out/dev/app/index.html"]
-                  ["shell" "grunt" "symlink" "--source=ui/public" "--target=.out/dev/app/public"]]
+                  ["shell" "grunt" "symlink" "--source=ui/public" "--target=.out/dev/app/public"]
+                  ["shell" "grunt" "symlink" "--source=.out/dev/app" "--target=resources/public"]]
   "electron-prod" ["do"
                    ["cljsbuild" "once" "main-prod"]
                    ["cljsbuild" "once" "ui-prod"]
@@ -41,7 +43,7 @@
   "electron-dist" ["shell" "scripts/package.sh"]}
 
  :hooks [leiningen.cljsbuild]
- :clean-targets [".out" ".tmp" ".dist"]
+ :clean-targets ^{:protect false} [".out" ".tmp" ".dist" "resources"]
 
  :cljsbuild
  {:builds
@@ -59,7 +61,9 @@
    {:source-paths ["ui/src"]
     :compiler {:output-to ".out/dev/app/ui.js"
                :output-dir ".out/dev/app/lib-ui"
-               :optimizations :none}}
+               :optimizations :none}
+    :figwheel {:on-jsload "blog-post.landing/on-reload"
+               :open-urls ["http://localhost:3449/index.html"]}}
 
    ;; The production profiles contain full optimizations.
    ;; NOTE!! When optimizations are set to something other than :none, then it
@@ -76,4 +80,8 @@
    {:source-paths ["ui/src"]
     :compiler {:output-to ".out/prod/app/ui.js"
                :output-dir ".tmp/prod/ui"
-               :optimizations :simple}}}})
+               :optimizations :simple}}}}
+
+ :figwheel {:server-logfile ".out/dev/logs/figwheel-logfile.log"
+            :css-dirs ["ui/public/css"]
+            :auto-clean false})
